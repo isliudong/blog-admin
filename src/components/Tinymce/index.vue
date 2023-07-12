@@ -17,7 +17,7 @@ import plugins from './plugins'
 import toolbar from './toolbar'
 import load from './dynamicLoadScript'
 
-const tinymceCDN = '/js/tinymce/tinymce.min.js'
+const tinymceCDN = './js/tinymce/tinymce.min.js'
 
 export default {
   name: 'Tinymce',

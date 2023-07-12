@@ -20,19 +20,20 @@ import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
 
-import VueAnalytics from 'vue-analytics'
+// 用户行为统计
+// import VueAnalytics from 'vue-analytics'
 
-Vue.use(VueAnalytics, {
-  id: 'UA-109340118-1',
-  router
-})
+// Vue.use(VueAnalytics, {
+//   id: 'UA-109340118-1',
+//   router
+// })
 
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
  * you can execute: mockXHR()
  *
- * Currently MockJs will be used in the production environment,
+ * Current MockJs will be used in the production environment,
  * please remove it before going online ! ! !
  */
 if (process.env.NODE_ENV === 'production') {
