@@ -40,26 +40,26 @@ module.exports = {
     proxy: {
       '/dev-api': {
         target: 'http://localhost:9090',
-        // target: 'http://xn--fjqz24bfqeo5p.site/blog',
+        // target: 'http://141.147.189.7/blog',
         pathRewrite: { '^/dev-api': '' },
         logLevel: 'debug'
       },
       '/blog': {
-        target: 'http://xn--fjqz24bfqeo5p.site',
+        target: 'http://141.147.189.7',
         // pathRewrite: { '^/dev-api': '' },
         logLevel: 'debug'
       },
       '/fileSever-dev': {
         target: 'http://localhost:8000',
         changeOrigin: true,
-        // target: 'http://xn--fjqz24bfqeo5p.site/blog',
+        // target: 'http://141.147.189.7/blog',
         pathRewrite: { '^/fileSever-dev': '' },
         logLevel: 'debug'
       },
       '/file-sever': {
-        target: 'http://快乐星球.site:8211',
+        target: 'http://141.147.189.7:8211',
         changeOrigin: true,
-        // target: 'http://xn--fjqz24bfqeo5p.site/blog',
+        // target: 'http://141.147.189.7/blog',
         pathRewrite: { '^/file-sever': '' },
         logLevel: 'debug'
       }

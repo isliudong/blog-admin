@@ -41,7 +41,7 @@ export default {
       imagecropperShow: false,
       imagecropperKey: 0,
       VUE_APP_FILE_BASE_API: '',
-      image: 'https://wpimg.wallstcn.com/577965b9-bb9e-4e02-9f0c-095b41417191'
+      image: 'hello.gif'
     }
   },
   mounted() {
