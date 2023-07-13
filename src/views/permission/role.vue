@@ -175,10 +175,6 @@ export default {
       const res = []
 
       for (let route of routes) {
-        // skip some route
-        if (route.hidden) {
-          continue
-        }
         const onlyOneShowingChild = this.onlyOneShowingChild(route.children, route)
         if (route.children && onlyOneShowingChild && !route.alwaysShow) {
           route = onlyOneShowingChild

@@ -374,6 +374,8 @@ export const asyncRoutes = [
   {
     path: '/pdf/download',
     component: () => import('@/views/pdf/download'),
+    meta: { title: 'pdf-download', icon: 'pdf' },
+    title: 'pdf-download',
     hidden: true
   },
 
@@ -440,7 +442,13 @@ export const asyncRoutes = [
 ]
 export const lastConstantRoutes = [
   // 放在最后，否则刷新页面会404
-  { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '*',
+    redirect: '/404',
+    meta: { title: '404', icon: '404' },
+    title: '404',
+    hidden: true
+  }
 ]
 
 const createRouter = () => new Router({

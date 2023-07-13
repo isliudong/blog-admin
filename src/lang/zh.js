@@ -65,7 +65,7 @@ export default {
     externalLink: '外链',
     donate: '打赏',
     '404': '404',
-    'pdf-download': 'pdf-download',
+    'pdf-download': 'pdf下载',
     profile: '个人中心',
     apiPermission: '接口权限',
     userManagement: '用户管理'
