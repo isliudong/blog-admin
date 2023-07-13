@@ -3,11 +3,17 @@
     <el-button type="primary" @click="handleAddRole">
       {{ $t('permission.addRole') }}
     </el-button>
-    <el-button type="primary" @click="handleRefreshRoute">
+    <el-button type="danger" @click="handleRefreshRoute">
       {{ $t('permission.refreshRoute') }}
     </el-button>
 
-    <el-table :data="rolesList" style="width: 100%;margin-top:30px;" border>
+    <el-table
+      :data="rolesList"
+      v-loading="loadingData"
+      element-loading-text="拼命加载中"
+      style="width: 100%;margin-top:30px;"
+      border
+    >
       <el-table-column align="center" label="ID" width="220">
         <template slot-scope="scope">
           {{ scope.row.id }}
@@ -45,7 +51,7 @@
     <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'Edit Role':'New Role'">
       <el-form :model="role" label-width="80px" label-position="left">
         <el-form-item label="Name">
-          <el-input v-model="role.name" placeholder="Role Name" />
+          <el-input v-model="role.name" placeholder="Role Name"/>
         </el-form-item>
         <el-form-item label="Available">
           <el-switch
@@ -106,6 +112,8 @@ export default {
   components: { Pagination },
   data() {
     return {
+      roleLoading: true,
+      routeLoading: true,
       role: Object.assign({}, defaultRole),
       routes: [],
       rolesList: [],
@@ -126,6 +134,9 @@ export default {
   computed: {
     routesData() {
       return this.routes
+    },
+    loadingData() {
+      return this.routeLoading || this.roleLoading
     }
   },
   created() {
@@ -135,13 +146,17 @@ export default {
   },
   methods: {
     async getRoutes() {
+      this.routeLoading = true
       const res = await getRoutes()
+      this.routeLoading = false
       this.serviceRoutes = res
       const routes = this.generateRoutes(res, null)
       this.routes = this.i18n(routes)
     },
     async getRoles() {
+      this.roleLoading = true
       const res = await getRoles(this.listQuery)
+      this.roleLoading = false
       this.rolesList = res.records
       this.total = res.total
     },

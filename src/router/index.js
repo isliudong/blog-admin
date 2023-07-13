@@ -95,9 +95,7 @@ export const constantRoutes = [
         meta: { title: 'profile', icon: 'user', noCache: true }
       }
     ]
-  },
-
-  { path: '*', redirect: '/404', hidden: true }
+  }
 ]
 
 /**
@@ -439,6 +437,10 @@ export const asyncRoutes = [
       }
     ]
   }
+]
+export const lastConstantRoutes = [
+  // 放在最后，否则刷新页面会404
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({

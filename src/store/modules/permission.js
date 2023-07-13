@@ -1,4 +1,4 @@
-import { asyncRoutes, constantRoutes } from '@/router'
+import { asyncRoutes, constantRoutes, lastConstantRoutes } from '@/router'
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -79,6 +79,8 @@ const actions = {
         roles.forEach(r => hadRoutes.push.apply(hadRoutes, r.routes))
         accessedRoutes = filterAsyncRoutes(asyncRoutes, hadRoutes)
       }
+      // 追加lastConstantRoutes, 用于404页面
+      accessedRoutes.push.apply(accessedRoutes, lastConstantRoutes)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })

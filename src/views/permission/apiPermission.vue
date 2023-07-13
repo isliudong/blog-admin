@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
+<!--    <div class="filter-container">
       <el-input
         v-model="listQuery.title"
         :placeholder="$t('table.title')"
@@ -33,7 +33,7 @@
       >
         {{ $t('table.export') }}
       </el-button>
-    </div>
+    </div>-->
 
     <el-table
       :key="tableKey"
@@ -68,7 +68,7 @@
           <span>{{ row.type }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Url" align="center" width="200px">
+      <el-table-column label="Url" align="center" >
         <template slot-scope="{row}">
           <span>{{ row.url }}</span>
         </template>
