@@ -4,7 +4,7 @@
   "description": "A magical vue admin. An out-of-box UI solution for enterprise applications. Newest development stack of vue. Lots of awesome features",
   "author": "Pan <panfree23@gmail.com>",
   "scripts": {
-    "dev": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve --mode development",
+    "development": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve --mode development",
     "production": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve --mode production",
     "lint": "eslint --ext .js,.vue src",
     "build:prod": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
