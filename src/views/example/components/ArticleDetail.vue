@@ -2,9 +2,9 @@
   <div class="createPost-container">
     <el-form ref="postForm" :model="postForm" :rules="rules" class="form-container">
       <sticky :z-index="10" :class-name="'sub-navbar '+postForm.status">
-        <CommentDropdown v-model="postForm.commentDisabled" />
+<!--        <CommentDropdown v-model="postForm.commentDisabled" />
         <PlatformDropdown v-model="postForm.platforms" />
-        <SourceUrlDropdown v-model="postForm.sourceUri" />
+        <SourceUrlDropdown v-model="postForm.sourceUri" />-->
         <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">
           Publish
         </el-button>
@@ -15,7 +15,7 @@
 
       <div class="createPost-main-container">
         <el-row>
-          <Warning />
+<!--          <Warning />-->
 
           <el-col :span="24">
             <el-form-item style="margin-bottom: 40px;" prop="title">
@@ -42,18 +42,18 @@
                                 </el-col>-->
 
                 <el-col :span="10">
-                  <el-form-item label-width="120px" label="Publish Time:" class="postInfo-container-item">
+<!--                  <el-form-item label-width="120px" label="Publish Time:" class="postInfo-container-item">
                     <el-date-picker
                       v-model="displayTime"
                       type="datetime"
                       format="yyyy-MM-dd HH:mm:ss"
                       placeholder="Select date and time"
                     />
-                  </el-form-item>
+                  </el-form-item>-->
                 </el-col>
 
                 <el-col :span="6">
-                  <el-form-item label-width="90px" label="Importance:" class="postInfo-container-item">
+<!--                  <el-form-item label-width="90px" label="Importance:" class="postInfo-container-item">
                     <el-rate
                       v-model="postForm.importance"
                       :max="3"
@@ -62,7 +62,7 @@
                       :high-threshold="3"
                       style="display:inline-block"
                     />
-                  </el-form-item>
+                  </el-form-item>-->
                 </el-col>
               </el-row>
             </div>
@@ -109,6 +109,7 @@ import MarkdownEditor from '@/components/MarkdownEditor/index.vue'
 const defaultForm = {
   status: 'draft',
   title: '', // 文章题目
+  type: 'ARTICLE', // 类型
   content: '', // 文章内容
   description: '', // 文章摘要
   sourceUri: '', // 文章外链

@@ -8,8 +8,8 @@
         class="filter-item"
         @keyup.enter.native="handleFilter"
       />
-      <el-select v-model="listQuery.status" class="filter-item" placeholder="状态">
-        <el-option v-for="item in statusQueryOptions" :key="item" :label="item" :value="item" />
+      <el-select v-model="listQuery.status" class="filter-item" placeholder="状态" clearable>
+        <el-option v-for="item in statusQueryOptions" :key="item.key" :label="item.label" :value="item.key"/>
       </el-select>
       <el-select
         v-model="listQuery.type"
@@ -21,12 +21,12 @@
         <el-option
           v-for="item in calendarTypeOptions"
           :key="item.key"
-          :label="item.display_name+'('+item.key+')'"
+          :label="item.display_name"
           :value="item.key"
         />
       </el-select>
       <el-select v-model="listQuery.sort" style="width: 140px" class="filter-item" @change="handleFilter">
-        <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key" />
+        <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key"/>
       </el-select>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         {{ $t('table.search') }}
@@ -40,7 +40,7 @@
       >
         {{ $t('table.add') }}
       </el-button>
-      <el-button
+<!--      <el-button
         v-waves
         :loading="downloadLoading"
         class="filter-item"
@@ -49,10 +49,10 @@
         @click="handleDownload"
       >
         {{ $t('table.export') }}
-      </el-button>
-      <el-checkbox v-model="showReviewer" class="filter-item" style="margin-left:15px;" @change="tableKey=tableKey+1">
+      </el-button>-->
+<!--      <el-checkbox v-model="showReviewer" class="filter-item" style="margin-left:15px;" @change="tableKey=tableKey+1">
         {{ $t('table.reviewer') }}
-      </el-checkbox>
+      </el-checkbox>-->
     </div>
 
     <el-table
@@ -103,11 +103,11 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('table.author')" width="110px" align="center">
+<!--      <el-table-column v-permission :label="$t('table.author')" width="110px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.author }}</span>
         </template>
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column v-if="showReviewer" :label="$t('table.reviewer')" width="110px" align="center">
         <template slot-scope="{row}">
           <span style="color:red;">{{ row.reviewer }}</span>
@@ -115,7 +115,7 @@
       </el-table-column>
       <el-table-column :label="$t('table.importance')" width="80px">
         <template slot-scope="{row}">
-          <svg-icon v-for="n in +3" :key="n" icon-class="star" class="meta-item__icon" />
+          <svg-icon v-for="n in +3" :key="n" icon-class="star" class="meta-item__icon"/>
         </template>
       </el-table-column>
       <el-table-column :label="$t('table.actions')" align="center" width="330" class-name="small-padding fixed-width">
@@ -169,14 +169,14 @@
           </el-select>
         </el-form-item>
         <el-form-item :label="$t('table.date')" prop="timestamp">
-          <el-date-picker v-model="temp.createDate" type="datetime" placeholder="Please pick a date" />
+          <el-date-picker v-model="temp.createDate" type="datetime" placeholder="Please pick a date"/>
         </el-form-item>
         <el-form-item :label="$t('table.title')" prop="title">
-          <el-input v-model="temp.title" />
+          <el-input v-model="temp.title"/>
         </el-form-item>
         <el-form-item :label="$t('table.status')">
           <el-select v-model="temp.status" class="filter-item" placeholder="Please select">
-            <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
+            <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item"/>
           </el-select>
         </el-form-item>
         <el-form-item :label="$t('table.importance')">
@@ -208,8 +208,8 @@
 
     <el-dialog :visible.sync="dialogPvVisible" title="Reading statistics">
       <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
-        <el-table-column prop="key" label="Channel" />
-        <el-table-column prop="pv" label="Pv" />
+        <el-table-column prop="key" label="Channel"/>
+        <el-table-column prop="pv" label="Pv"/>
       </el-table>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogPvVisible = false">{{ $t('table.confirm') }}</el-button>
@@ -225,10 +225,8 @@ import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 const calendarTypeOptions = [
-  { key: 'CN', display_name: 'China' },
-  { key: 'US', display_name: 'USA' },
-  { key: 'JP', display_name: 'Japan' },
-  { key: 'EU', display_name: 'Eurozone' }
+  { key: 'ARTICLE', display_name: '文章' },
+  { key: 'QUESTION', display_name: '问答' }
 ]
 
 // arr to obj, such as { CN : "China", US : "USA" }
@@ -272,9 +270,9 @@ export default {
       },
       importanceOptions: [1, 2, 3],
       calendarTypeOptions,
-      sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
+      sortOptions: [{ label: '时间顺序', key: '+id' }, { label: '时间倒序', key: '-id' }],
       statusOptions: ['published', 'draft', 'deleted'],
-      statusQueryOptions: [undefined, 'published', 'draft', 'deleted'],
+      statusQueryOptions: [{ label: '已发布', key: 'published' }, { label: '草稿', key: 'draft' }],
       showReviewer: false,
       temp: {
         id: undefined,
@@ -307,14 +305,20 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
+      // 清空后为空字符串，会被过滤掉，所以需要转换为undefined
+      if (this.listQuery.status === '') {
+        this.listQuery.status = undefined
+      }
+      if (this.listQuery.importance === '') {
+        this.listQuery.importance = undefined
+      }
+      if (this.listQuery.type === '') {
+        this.listQuery.type = undefined
+      }
       fetchList(this.listQuery).then(response => {
+        this.listLoading = false
         this.list = response.records
         this.total = response.total
-
-        // Just to simulate the time of the request
-        setTimeout(() => {
-          this.listLoading = false
-        }, 1.5 * 1000)
       })
     },
     handleFilter() {
@@ -322,11 +326,13 @@ export default {
       this.getList()
     },
     handleModifyStatus(row, status) {
-      this.$message({
-        message: '操作成功',
-        type: 'success'
-      })
       row.status = status
+      updateArticle(row).then(() => {
+        this.$message({
+          message: '操作成功',
+          type: 'success'
+        })
+      })
     },
     sortChange(data) {
       const { prop, order } = data
