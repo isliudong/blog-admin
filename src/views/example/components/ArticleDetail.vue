@@ -82,7 +82,8 @@
         </el-form-item>
 
         <el-form-item prop="content" style="margin-bottom: 30px;">
-          <Tinymce ref="editor" v-model="postForm.content" :height="400" />
+          <Tinymce v-if="editor==='Tinymce'" ref="editor" v-model="postForm.content" :height="400" />
+          <MarkdownEditor v-if="editor==='MarkdownEditor'" ref="editor" v-model="postForm.content" :height="'400px'" />
         </el-form-item>
 
         <el-form-item prop="img" style="margin-bottom: 30px;">
@@ -103,6 +104,7 @@ import { createArticle, fetchArticle, updateArticle } from '@/api/article'
 import { searchUser } from '@/api/remote-search'
 import Warning from './Warning'
 import { CommentDropdown, PlatformDropdown, SourceUrlDropdown } from './Dropdown'
+import MarkdownEditor from '@/components/MarkdownEditor/index.vue'
 
 const defaultForm = {
   status: 'draft',
@@ -120,7 +122,7 @@ const defaultForm = {
 
 export default {
   name: 'ArticleDetail',
-  components: { Tinymce, MDinput, Upload, Sticky, Warning, CommentDropdown, PlatformDropdown, SourceUrlDropdown },
+  components: { MarkdownEditor, Tinymce, MDinput, Upload, Sticky, Warning, CommentDropdown, PlatformDropdown, SourceUrlDropdown },
   props: {
     isEdit: {
       type: Boolean,
@@ -155,6 +157,7 @@ export default {
       }
     }
     return {
+      editor: 'MarkdownEditor',
       postForm: Object.assign({}, defaultForm),
       loading: false,
       userListOptions: [],
