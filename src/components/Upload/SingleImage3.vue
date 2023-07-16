@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     imageUrl() {
-      return this.value ? process.env.VUE_APP_FILE_HOST + '/' + this.value : ''
+      return this.value ? process.env.VUE_APP_FILE_BASE_API + '/' + this.value : ''
     }
   },
   mounted() {

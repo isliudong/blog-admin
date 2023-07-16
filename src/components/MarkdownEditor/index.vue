@@ -7,6 +7,8 @@
 import 'codemirror/lib/codemirror.css' // codemirror
 import '@toast-ui/editor/dist/toastui-editor.css' // editor style
 
+import '@toast-ui/editor/dist/i18n/zh-cn.js'
+
 import { Editor } from '@toast-ui/editor'
 import { defaultOptions } from './default-options'
 
@@ -42,7 +44,7 @@ export default {
     language: {
       type: String,
       required: false,
-      default: 'en_US' // https://github.com/nhnent/tui.editor/tree/master/src/js/langs
+      default: 'zh-CN' // https://github.com/nhn/tui.editor/blob/master/docs/en/i18n.md
     }
   },
   data() {

@@ -39,7 +39,7 @@
 
     <el-table-column align="center" label="Readings" width="95">
       <template slot-scope="scope">
-        <span>{{ scope.row.pageviews }}</span>
+        <span>{{ scope.row.views }}</span>
       </template>
     </el-table-column>
 

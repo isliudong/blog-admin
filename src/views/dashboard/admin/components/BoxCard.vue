@@ -47,7 +47,7 @@ export default {
     return {
       statisticsData: {
         article_count: 1024,
-        pageviews_count: 1024
+        views_count: 1024
       }
     }
   },

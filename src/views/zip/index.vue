@@ -23,7 +23,7 @@
       </el-table-column>
       <el-table-column label="Readings" width="115" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          {{ scope.row.views }}
         </template>
       </el-table-column>
       <el-table-column align="center" label="Date" width="220">
@@ -63,7 +63,7 @@ export default {
       this.downloadLoading = true
       import('@/vendor/Export2Zip').then(zip => {
         const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
-        const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
+        const filterVal = ['id', 'title', 'author', 'views', 'display_time']
         const list = this.list
         const data = this.formatJson(filterVal, list)
         zip.export_txt_to_zip(tHeader, data, this.filename, this.filename)

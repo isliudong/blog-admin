@@ -4,6 +4,7 @@
       <el-input
         v-model="listQuery.keyword"
         :placeholder="$t('table.title')"
+        clearable
         style="width: 200px;"
         class="filter-item"
         @keyup.enter.native="handleFilter"
@@ -25,10 +26,21 @@
           :value="item.key"
         />
       </el-select>
+      <el-input
+        v-if="checkPermission(['admin'])"
+        clearable
+        v-model="listQuery.author"
+        :placeholder="$t('table.author')"
+        style="width: 200px;"
+        class="filter-item"
+        @keyup.enter.native="handleFilter"
+      />
       <el-select v-model="listQuery.sort" style="width: 140px" class="filter-item" @change="handleFilter">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key"/>
       </el-select>
-      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" :loading="listLoading"
+                 @click="handleFilter"
+      >
         {{ $t('table.search') }}
       </el-button>
       <el-button
@@ -40,19 +52,19 @@
       >
         {{ $t('table.add') }}
       </el-button>
-<!--      <el-button
-        v-waves
-        :loading="downloadLoading"
-        class="filter-item"
-        type="primary"
-        icon="el-icon-download"
-        @click="handleDownload"
-      >
-        {{ $t('table.export') }}
-      </el-button>-->
-<!--      <el-checkbox v-model="showReviewer" class="filter-item" style="margin-left:15px;" @change="tableKey=tableKey+1">
-        {{ $t('table.reviewer') }}
-      </el-checkbox>-->
+      <!--      <el-button
+              v-waves
+              :loading="downloadLoading"
+              class="filter-item"
+              type="primary"
+              icon="el-icon-download"
+              @click="handleDownload"
+            >
+              {{ $t('table.export') }}
+            </el-button>-->
+      <!--      <el-checkbox v-model="showReviewer" class="filter-item" style="margin-left:15px;" @change="tableKey=tableKey+1">
+              {{ $t('table.reviewer') }}
+            </el-checkbox>-->
     </div>
 
     <el-table
@@ -65,16 +77,30 @@
       style="width: 100%;"
       @sort-change="sortChange"
     >
+      <!--      <el-table-column
+              :label="$t('table.id')"
+              prop="id"
+              sortable="custom"
+              align="center"
+              width="80"
+              :class-name="getSortClass('id')"
+            >
+              <template slot-scope="{row}">
+                <span>{{ row.id }}</span>
+              </template>
+            </el-table-column>-->
       <el-table-column
-        :label="$t('table.id')"
-        prop="id"
-        sortable="custom"
+        :label="'封面'"
+        width="70px"
         align="center"
-        width="80"
-        :class-name="getSortClass('id')"
       >
         <template slot-scope="{row}">
-          <span>{{ row.id }}</span>
+          <el-image
+            style="width: 40px; height: 30px"
+            :src="VUE_APP_FILE_BASE_API+'/'+row.img"
+            fit="cover"
+            :lazy="true"
+          />
         </template>
       </el-table-column>
       <el-table-column :label="$t('table.title')" min-width="150px">
@@ -82,42 +108,48 @@
           <router-link :to="'/example/edit/'+row.id" class="link-type">
             <span>{{ row.title }}</span>
           </router-link>
-          <el-tag>{{ 'CN' | typeFilter }}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column :label="$t('table.type')" class-name="status-col" width="100">
+        <template slot-scope="{row}">
+          <el-tag :type="row.type | typeStyleFilter">
+            {{ row.type | typeFilter }}
+          </el-tag>
         </template>
       </el-table-column>
       <el-table-column :label="$t('table.readings')" align="center" width="95">
         <template slot-scope="{row}">
-          <span v-if="row.pageviews" class="link-type" @click="handleFetchPv(row.pageviews)">{{ row.pageviews }}</span>
+          <span v-if="row.views" class="link-type" @click="handleFetchPv(row.views)">{{ row.views }}</span>
           <span v-else>0</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('table.date')" width="150px" align="center">
+      <el-table-column :label="$t('table.createDate')" width="150px" align="center">
         <template slot-scope="{row}">
           <span>{{ new Date(row.createDate) | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('table.status')" class-name="status-col" width="100">
         <template slot-scope="{row}">
-          <el-tag :type="row.status | statusFilter">
-            {{ row.status }}
+          <el-tag :type="row.status | statusStyleFilter">
+            {{ row.status | statusFilter }}
           </el-tag>
         </template>
       </el-table-column>
-<!--      <el-table-column v-permission :label="$t('table.author')" width="110px" align="center">
+      <el-table-column v-if="checkPermission(['admin'])" :label="$t('table.author')" width="110px" align="center">
         <template slot-scope="{row}">
           <span>{{ row.author }}</span>
         </template>
-      </el-table-column>-->
+      </el-table-column>
       <el-table-column v-if="showReviewer" :label="$t('table.reviewer')" width="110px" align="center">
         <template slot-scope="{row}">
           <span style="color:red;">{{ row.reviewer }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('table.importance')" width="80px">
-        <template slot-scope="{row}">
-          <svg-icon v-for="n in +3" :key="n" icon-class="star" class="meta-item__icon"/>
-        </template>
-      </el-table-column>
+      <!--      <el-table-column :label="$t('table.importance')" width="80px">
+              <template slot-scope="{row}">
+                <svg-icon v-for="n in +3" :key="n" icon-class="star" class="meta-item__icon"/>
+              </template>
+            </el-table-column>-->
       <el-table-column :label="$t('table.actions')" align="center" width="330" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
@@ -168,26 +200,26 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('table.date')" prop="timestamp">
+<!--        <el-form-item :label="$t('table.createDate')" prop="timestamp">
           <el-date-picker v-model="temp.createDate" type="datetime" placeholder="Please pick a date"/>
-        </el-form-item>
+        </el-form-item>-->
         <el-form-item :label="$t('table.title')" prop="title">
           <el-input v-model="temp.title"/>
         </el-form-item>
-        <el-form-item :label="$t('table.status')">
+        <el-form-item :label="$t('table.status')" prop="status">
           <el-select v-model="temp.status" class="filter-item" placeholder="Please select">
             <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item"/>
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('table.importance')">
+<!--        <el-form-item :label="$t('table.importance')">
           <el-rate
             v-model="temp.importance"
             :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
             :max="3"
             style="margin-top:8px;"
           />
-        </el-form-item>
-        <el-form-item :label="$t('table.remark')">
+        </el-form-item>-->
+        <el-form-item :label="$t('table.desc')">
           <el-input
             v-model="temp.description"
             :autosize="{ minRows: 2, maxRows: 4}"
@@ -222,7 +254,8 @@
 import { createArticle, deleteArticle, fetchList, fetchPv, updateArticle } from '@/api/article'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
-import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import Pagination from '@/components/Pagination'
+import checkPermission from '@/utils/permission' // secondary package based on el-pagination
 
 const calendarTypeOptions = [
   { key: 'ARTICLE', display_name: '文章' },
@@ -240,7 +273,7 @@ export default {
   components: { Pagination },
   directives: { waves },
   filters: {
-    statusFilter(status) {
+    statusStyleFilter(status) {
       const statusMap = {
         published: 'success',
         draft: 'info',
@@ -248,12 +281,29 @@ export default {
       }
       return statusMap[status]
     },
+    statusFilter(status) {
+      const statusMap = {
+        published: '已发布',
+        draft: '草稿',
+        undefined: '新建'
+      }
+      return statusMap[status]
+    },
+    typeStyleFilter(type) {
+      const typeMap = {
+        ARTICLE: 'success',
+        QUESTION: 'warning',
+        undefined: 'danger'
+      }
+      return typeMap[type]
+    },
     typeFilter(type) {
       return calendarTypeKeyValue[type]
     }
   },
   data() {
     return {
+      VUE_APP_FILE_BASE_API: process.env.VUE_APP_FILE_BASE_API,
       tableKey: 0,
       list: null,
       total: 0,
@@ -263,6 +313,7 @@ export default {
         size: 20,
         highlight: false,
         status: undefined,
+        author: undefined,
         importance: undefined,
         keyword: undefined,
         type: undefined,
@@ -271,7 +322,7 @@ export default {
       importanceOptions: [1, 2, 3],
       calendarTypeOptions,
       sortOptions: [{ label: '时间顺序', key: '+id' }, { label: '时间倒序', key: '-id' }],
-      statusOptions: ['published', 'draft', 'deleted'],
+      statusOptions: ['published', 'draft'],
       statusQueryOptions: [{ label: '已发布', key: 'published' }, { label: '草稿', key: 'draft' }],
       showReviewer: false,
       temp: {
@@ -286,15 +337,16 @@ export default {
       dialogFormVisible: false,
       dialogStatus: '',
       textMap: {
-        update: 'Edit',
-        create: 'Create'
+        update: '编辑行信息',
+        create: '新增'
       },
       dialogPvVisible: false,
       pvData: [],
       rules: {
         type: [{ required: true, message: 'type is required', trigger: 'change' }],
         timestamp: [{ type: 'date', required: true, message: 'timestamp is required', trigger: 'change' }],
-        title: [{ required: true, message: 'title is required', trigger: 'blur' }]
+        title: [{ required: true, message: 'title is required', trigger: 'blur' }],
+        status: [{ required: true, message: 'status is required', trigger: 'change' }]
       },
       downloadLoading: false
     }
@@ -303,14 +355,18 @@ export default {
     this.getList()
   },
   methods: {
+    checkPermission,
     getList() {
       this.listLoading = true
       // 清空后为空字符串，会被过滤掉，所以需要转换为undefined
+      if (this.listQuery.title === '') {
+        this.listQuery.title = undefined
+      }
       if (this.listQuery.status === '') {
         this.listQuery.status = undefined
       }
-      if (this.listQuery.importance === '') {
-        this.listQuery.importance = undefined
+      if (this.listQuery.author === '') {
+        this.listQuery.author = undefined
       }
       if (this.listQuery.type === '') {
         this.listQuery.type = undefined

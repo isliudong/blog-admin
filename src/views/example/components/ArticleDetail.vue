@@ -2,9 +2,9 @@
   <div class="createPost-container">
     <el-form ref="postForm" :model="postForm" :rules="rules" class="form-container">
       <sticky :z-index="10" :class-name="'sub-navbar '+postForm.status">
-<!--        <CommentDropdown v-model="postForm.commentDisabled" />
-        <PlatformDropdown v-model="postForm.platforms" />
-        <SourceUrlDropdown v-model="postForm.sourceUri" />-->
+        <!--        <CommentDropdown v-model="postForm.commentDisabled" />
+                <PlatformDropdown v-model="postForm.platforms" />
+                <SourceUrlDropdown v-model="postForm.sourceUri" />-->
         <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">
           Publish
         </el-button>
@@ -15,7 +15,7 @@
 
       <div class="createPost-main-container">
         <el-row>
-<!--          <Warning />-->
+          <!--          <Warning />-->
 
           <el-col :span="24">
             <el-form-item style="margin-bottom: 40px;" prop="title">
@@ -42,27 +42,27 @@
                                 </el-col>-->
 
                 <el-col :span="10">
-<!--                  <el-form-item label-width="120px" label="Publish Time:" class="postInfo-container-item">
-                    <el-date-picker
-                      v-model="displayTime"
-                      type="datetime"
-                      format="yyyy-MM-dd HH:mm:ss"
-                      placeholder="Select date and time"
-                    />
-                  </el-form-item>-->
+                  <!--                  <el-form-item label-width="120px" label="Publish Time:" class="postInfo-container-item">
+                                      <el-date-picker
+                                        v-model="displayTime"
+                                        type="datetime"
+                                        format="yyyy-MM-dd HH:mm:ss"
+                                        placeholder="Select date and time"
+                                      />
+                                    </el-form-item>-->
                 </el-col>
 
                 <el-col :span="6">
-<!--                  <el-form-item label-width="90px" label="Importance:" class="postInfo-container-item">
-                    <el-rate
-                      v-model="postForm.importance"
-                      :max="3"
-                      :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
-                      :low-threshold="1"
-                      :high-threshold="3"
-                      style="display:inline-block"
-                    />
-                  </el-form-item>-->
+                  <!--                  <el-form-item label-width="90px" label="Importance:" class="postInfo-container-item">
+                                      <el-rate
+                                        v-model="postForm.importance"
+                                        :max="3"
+                                        :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
+                                        :low-threshold="1"
+                                        :high-threshold="3"
+                                        style="display:inline-block"
+                                      />
+                                    </el-form-item>-->
                 </el-col>
               </el-row>
             </div>
@@ -82,12 +82,12 @@
         </el-form-item>
 
         <el-form-item prop="content" style="margin-bottom: 30px;">
-          <Tinymce v-if="editor==='Tinymce'" ref="editor" v-model="postForm.content" :height="400" />
-          <MarkdownEditor v-if="editor==='MarkdownEditor'" ref="editor" v-model="postForm.content" :height="'400px'" />
+          <Tinymce v-if="editor==='Tinymce'" ref="editor" v-model="postForm.content" :height="400"/>
+          <MarkdownEditor v-if="editor==='MarkdownEditor'" ref="editor" v-model="postForm.content" :height="'400px'" @uploadImageEvent="uploadImage" />
         </el-form-item>
 
         <el-form-item prop="img" style="margin-bottom: 30px;">
-          <Upload v-model="postForm.img" />
+          <Upload v-model="postForm.img"/>
         </el-form-item>
       </div>
     </el-form>
@@ -105,6 +105,7 @@ import { searchUser } from '@/api/remote-search'
 import Warning from './Warning'
 import { CommentDropdown, PlatformDropdown, SourceUrlDropdown } from './Dropdown'
 import MarkdownEditor from '@/components/MarkdownEditor/index.vue'
+import { uploadImage } from '@/api/file'
 
 const defaultForm = {
   status: 'draft',
@@ -291,6 +292,26 @@ export default {
       searchUser(query).then(response => {
         if (!response.data.items) return
         this.userListOptions = response.data.items.map(v => v.name)
+      })
+    },
+
+    // Custom picture upload
+    uploadImageBase64(file, callback) {
+      const reader = new FileReader()
+      reader.onload = ({ target }) => {
+        callback(target.result || '')
+      }
+      reader.readAsDataURL(file)
+    },
+    // Custom picture upload
+    uploadImage(file, callback) {
+      const forms = new FormData()
+      const configs = {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }
+      forms.append('file', file)
+      uploadImage(forms, configs).then(response => {
+        callback(process.env.VUE_APP_FILE_BASE_API + '/' + response.fileKey)
       })
     }
   }

@@ -30,7 +30,7 @@
         </el-table-column>
         <el-table-column label="Readings" width="115" align="center">
           <template slot-scope="scope">
-            {{ scope.row.pageviews }}
+            {{ scope.row.views }}
           </template>
         </el-table-column>
       </el-table-column>
@@ -74,7 +74,7 @@ export default {
       import('@/vendor/Export2Excel').then(excel => {
         const multiHeader = [['Id', 'Main Information', '', '', 'Date']]
         const header = ['', 'Title', 'Author', 'Readings', '']
-        const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
+        const filterVal = ['id', 'title', 'author', 'views', 'display_time']
         const list = this.list
         const data = this.formatJson(filterVal, list)
         const merges = ['A1:A2', 'B1:D1', 'E1:E2']

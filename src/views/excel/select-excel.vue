@@ -36,7 +36,7 @@
       </el-table-column>
       <el-table-column label="Readings" width="115" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          {{ scope.row.views }}
         </template>
       </el-table-column>
       <el-table-column align="center" label="PDate" width="220">
@@ -82,7 +82,7 @@ export default {
         this.downloadLoading = true
         import('@/vendor/Export2Excel').then(excel => {
           const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
-          const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
+          const filterVal = ['id', 'title', 'author', 'views', 'display_time']
           const list = this.multipleSelection
           const data = this.formatJson(filterVal, list)
           excel.export_json_to_excel({

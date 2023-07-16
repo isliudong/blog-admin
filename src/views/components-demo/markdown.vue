@@ -71,9 +71,9 @@ export default {
       content4: content,
       html: '',
       languageTypeList: {
-        'en': 'en_US',
-        'zh': 'zh_CN',
-        'es': 'es_ES'
+        'en': 'en-US',
+        'zh': 'zh-CN',
+        'es': 'es-ES'
       }
     }
   },

@@ -21,7 +21,7 @@ for (let i = 0; i < count; i++) {
     'status|1': ['published', 'draft'],
     display_time: '@datetime',
     comment_disabled: true,
-    pageviews: '@integer(300, 5000)',
+    views: '@integer(300, 5000)',
     image_uri,
     platforms: ['a-platform']
   }))

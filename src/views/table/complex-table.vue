@@ -68,7 +68,7 @@
       </el-table-column>
       <el-table-column :label="$t('table.readings')" align="center" width="95">
         <template slot-scope="{row}">
-          <span v-if="row.pageviews" class="link-type" @click="handleFetchPv(row.pageviews)">{{ row.pageviews }}</span>
+          <span v-if="row.views" class="link-type" @click="handleFetchPv(row.views)">{{ row.views }}</span>
           <span v-else>0</span>
         </template>
       </el-table-column>
