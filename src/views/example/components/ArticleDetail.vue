@@ -76,14 +76,14 @@
             type="textarea"
             class="article-textarea"
             autosize
-            placeholder="Please enter the content"
+            placeholder="Please enter the description"
           />
-          <span v-show="contentShortLength" class="word-counter">{{ contentShortLength }}words</span>
         </el-form-item>
 
         <el-form-item prop="content" style="margin-bottom: 30px;">
+          <span v-show="contentShortLength" class="word-counter">{{ contentShortLength }}words</span>
           <Tinymce v-if="editor==='Tinymce'" ref="editor" v-model="postForm.content" :height="400"/>
-          <MarkdownEditor v-if="editor==='MarkdownEditor'" ref="editor" v-model="postForm.content" :height="'400px'" @uploadImageEvent="uploadImage" />
+          <MarkdownEditor v-if="editor==='MarkdownEditor'" ref="editor" v-model="postForm.content" :height="'90vh'" @uploadImageEvent="uploadImage" />
         </el-form-item>
 
         <el-form-item prop="img" style="margin-bottom: 30px;">
@@ -174,7 +174,7 @@ export default {
   },
   computed: {
     contentShortLength() {
-      return this.postForm.description.length
+      return this.postForm.content?.length
     },
     lang() {
       return this.$store.getters.language
@@ -341,8 +341,8 @@ export default {
   .word-counter {
     width: 40px;
     position: absolute;
-    right: 10px;
-    top: 0px;
+    right: 31px;
+    top: -34px;
   }
 }
 

@@ -102,6 +102,10 @@ export default {
 
 .upload-container {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   position: relative;
   @include clearfix;
 
