@@ -6,6 +6,10 @@ const state = {
     opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
     withoutAnimation: false
   },
+  navbar: {
+    opened: Cookies.get('navbarStatus') ? !!+Cookies.get('navbarStatus') : false,
+    withoutAnimation: false
+  },
   device: 'desktop',
   language: getLanguage(),
   size: Cookies.get('size') || 'medium'
@@ -19,6 +23,15 @@ const mutations = {
       Cookies.set('sidebarStatus', 1)
     } else {
       Cookies.set('sidebarStatus', 0)
+    }
+  },
+  TOGGLE_NAVBAR: state => {
+    state.navbar.opened = !state.navbar.opened
+    state.navbar.withoutAnimation = false
+    if (state.navbar.opened) {
+      Cookies.set('navbarStatus', 1)
+    } else {
+      Cookies.set('navbarStatus', 0)
     }
   },
   CLOSE_SIDEBAR: (state, withoutAnimation) => {
@@ -45,6 +58,12 @@ const actions = {
   },
   closeSideBar({ commit }, { withoutAnimation }) {
     commit('CLOSE_SIDEBAR', withoutAnimation)
+  },
+  toggleNavBar({ commit }) {
+    commit('TOGGLE_NAVBAR')
+  },
+  closeNavBar({ commit }, { withoutAnimation }) {
+    commit('CLOSE_NAVBAR', withoutAnimation)
   },
   toggleDevice({ commit }, device) {
     commit('TOGGLE_DEVICE', device)

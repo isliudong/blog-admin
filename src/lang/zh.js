@@ -1,5 +1,6 @@
 export default {
   route: {
+    shop: 'GPT 商店',
     dashboard: '首页',
     documentation: '文档',
     guide: '引导页',
@@ -187,6 +188,7 @@ export default {
     theme: '主题色',
     tagsView: '开启 Tags-View',
     fixedHeader: '固定 Header',
-    sidebarLogo: '侧边栏 Logo'
+    sidebarLogo: '侧边栏 Logo',
+    showNavbar: '显示导航栏'
   }
 }

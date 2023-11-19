@@ -19,12 +19,17 @@
       </div>
 
       <div class="drawer-item">
+        <span>{{ $t('settings.showNavbar') }}</span>
+        <el-switch v-model="showNavbar" class="drawer-switch" />
+      </div>
+
+      <div class="drawer-item">
         <span>{{ $t('settings.sidebarLogo') }}</span>
         <el-switch v-model="sidebarLogo" class="drawer-switch" />
       </div>
-      <a v-if="isShowJob" href="https://panjiachen.github.io/vue-element-admin-site/zh/job/" target="_blank" class="job-link">
+      <a v-if="isShowJob" href="/" target="_blank" class="job-link">
         <el-alert
-          title="快乐星球管理系统"
+          title="panghucm"
           type="success"
           :closable="false"
         />
@@ -60,6 +65,14 @@ export default {
           key: 'fixedHeader',
           value: val
         })
+      }
+    },
+    showNavbar: {
+      get() {
+        return this.$store.state.app.navbar.opened
+      },
+      set(val) {
+        this.$store.dispatch('app/toggleNavBar', val)
       }
     },
     tagsView: {

@@ -1,5 +1,5 @@
 module.exports = {
-  title: '创作中心',
+  title: 'Panghu',
 
   /**
    * @type {boolean} true | false

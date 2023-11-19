@@ -1,5 +1,6 @@
 export default {
   route: {
+    shop: 'GPT Shop',
     dashboard: 'Dashboard',
     documentation: 'Documentation',
     guide: 'Guide',
@@ -171,6 +172,7 @@ export default {
     theme: 'Theme Color',
     tagsView: 'Open Tags-View',
     fixedHeader: 'Fixed Header',
-    sidebarLogo: 'Sidebar Logo'
+    sidebarLogo: 'Sidebar Logo',
+    showNavbar: 'Show Navbar'
   }
 }

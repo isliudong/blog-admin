@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div v-if="user">
+    <div v-if="user&&user.roles.indexOf('admin')>-1">
       <el-row :gutter="20">
 
         <el-col :span="6" :xs="24">
@@ -25,6 +25,9 @@
 
       </el-row>
     </div>
+    <div v-else>
+      即将上线...
+    </div>
   </div>
 </template>
 
@@ -46,7 +49,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'name',
+      'username',
+      'email',
       'avatar',
       'roles'
     ])
@@ -57,9 +61,9 @@ export default {
   methods: {
     getUser() {
       this.user = {
-        name: this.name,
+        username: this.username,
         roles: this.roles.map(r => r.name).join(' | '),
-        email: 'admin@test.com',
+        email: this.email,
         avatar: this.avatar
       }
     }

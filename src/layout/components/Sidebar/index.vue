@@ -46,6 +46,9 @@ export default {
     variables() {
       return variables
     },
+    themeColor() {
+      return this.$store.state.settings.theme
+    },
     isCollapse() {
       return !this.sidebar.opened
     }

@@ -12,7 +12,7 @@
         </pan-thumb>
       </div>
       <div class="box-center">
-        <div class="user-name text-center">{{ user.name }}</div>
+        <div class="user-name text-center">{{ user.username }}</div>
         <div class="user-role text-center text-muted">{{ user.roles | uppercaseFirst }}</div>
       </div>
     </div>
@@ -22,7 +22,7 @@
         <div class="user-bio-section-header"><svg-icon icon-class="education" /><span>Education</span></div>
         <div class="user-bio-section-body">
           <div class="text-muted">
-            JS in Computer Science from the University of Technology
+            清华大学硕士
           </div>
         </div>
       </div>
@@ -31,19 +31,19 @@
         <div class="user-bio-section-header"><svg-icon icon-class="skill" /><span>Skills</span></div>
         <div class="user-bio-section-body">
           <div class="progress-item">
-            <span>Vue</span>
+            <span>唱</span>
             <el-progress :percentage="70" />
           </div>
           <div class="progress-item">
-            <span>JavaScript</span>
+            <span>跳</span>
             <el-progress :percentage="18" />
           </div>
           <div class="progress-item">
-            <span>Css</span>
+            <span>Rap</span>
             <el-progress :percentage="12" />
           </div>
           <div class="progress-item">
-            <span>ESLint</span>
+            <span>篮球</span>
             <el-progress :percentage="100" status="success" />
           </div>
         </div>
@@ -62,7 +62,7 @@ export default {
       type: Object,
       default: () => {
         return {
-          name: '',
+          username: '',
           email: '',
           avatar: '',
           roles: ''
