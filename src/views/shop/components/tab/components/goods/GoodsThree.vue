@@ -1,6 +1,6 @@
 <template>
   <div class="app-container documentation-container">
-    <a class="pan-btn blue-btn document-btn-style" target="_blank" >GPT-35-turbo</a>
+    <div class="pan-btn blue-btn document-btn-style" target="_blank" >GPT-3.5-turbo</div>
   </div>
 </template>
 

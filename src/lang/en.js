@@ -75,10 +75,12 @@ export default {
     size: 'Global Size'
   },
   login: {
-    title: 'Login Form',
+    title: 'Panghu CM',
     logIn: 'Login',
     username: 'Username',
     password: 'Password',
+    visitorUsername: 'Username',
+    visitorPassword: 'Password',
     any: 'not any',
     thirdparty: 'Or connect with',
     thirdpartyTips: 'Can not be simulated on local, so please combine you own business simulation! ! !'

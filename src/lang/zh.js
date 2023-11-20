@@ -80,10 +80,12 @@ export default {
     size: '布局大小'
   },
   login: {
-    title: '系统登录',
+    title: 'Panghu CM',
     logIn: '登录',
     username: '账号',
     password: '密码',
+    visitorUsername: '访客账号',
+    visitorPassword: '访客密码',
     any: '随便填不行',
     thirdparty: '第三方登录',
     thirdpartyTips: '暂未启用'

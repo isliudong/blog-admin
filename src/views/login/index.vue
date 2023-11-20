@@ -54,13 +54,13 @@
 
       <div style="position:relative">
         <div class="tips">
-          <span style="margin-right:18px;">{{ $t('login.username') }} : editor</span>
-          <span>{{ $t('login.password') }} : editor</span>
+          <span style="margin-right:18px;">{{ $t('login.visitorUsername') }} : editor</span>
+          <span>{{ $t('login.visitorPassword') }} : editor</span>
         </div>
 
-        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
+<!--        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
           {{ $t('login.thirdparty') }}
-        </el-button>
+        </el-button>-->
       </div>
     </el-form>
 

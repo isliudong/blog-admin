@@ -1,10 +1,10 @@
 <template>
   <div class="tab-container">
-    <el-tag style="margin-left: 0px">GPT4 GPT3.5</el-tag>
+    <el-tag style="margin-left: 0px">GPT-4</el-tag>
+    <el-tag style="margin-left: 30px">GPT-3.5-TURBO</el-tag>
     <el-tag style="margin-left: 30px">ApiKey</el-tag>
     <el-tag style="margin-left: 30px">ChatGPT</el-tag>
-    <el-tag style="margin-left: 30px">Azure</el-tag>
-    <el-alert :closable="false" style="width:210px;display:inline-block;vertical-align: middle;margin-left:30px;" title="无需代理，国内可直接访问" type="success" />
+    <el-alert :closable="false" style="width:210px;display:inline-block;vertical-align: middle;margin-left:30px;" title="国内直连" type="success" />
     <el-tabs v-model="activeName" style="margin-top:15px;" type="border-card">
       <el-tab-pane v-for="item in tabMapOptions" :key="item.key" :label="item.label" :name="item.key">
         <keep-alive>

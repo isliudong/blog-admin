@@ -1,6 +1,6 @@
 <template>
   <div class="app-container documentation-container">
-    <example v-if="getUser.username==='admin'"/>
+    <example v-if="checkPermission(['admin'])"/>
     <div v-else>
       这里什么都没有...
     </div>
@@ -9,9 +9,11 @@
 
 <script>
 import example from '@/views/shop/components/example.vue'
+import checkPermission from '@/utils/permission'
 
 export default {
   name: 'GoodsTest',
+  methods: { checkPermission },
   components: { example },
   data() {
     return {
