@@ -4,7 +4,7 @@
       <img src="https://wpimg.wallstcn.com/e7d23d71-cf19-4b90-a1cc-f56af8c0903d.png">
     </div>
     <div style="position:relative;">
-      <pan-thumb :image="avatar.startsWith('http')?avatar:'/file-sever/'+avatar" class="panThumb" />
+      <pan-thumb :image="avatar.startsWith('http')?avatar:VUE_APP_FILE_BASE_API+'/'+avatar" class="panThumb" />
       <mallki class-name="mallki-text" text="vue-element-admin" />
       <div style="padding-top:35px;" class="progress-item">
         <span>Vue</span>
@@ -48,8 +48,12 @@ export default {
       statisticsData: {
         article_count: 1024,
         views_count: 1024
-      }
+      },
+      VUE_APP_FILE_BASE_API: ''
     }
+  },
+  mounted() {
+    this.VUE_APP_FILE_BASE_API = process.env.VUE_APP_FILE_BASE_API
   },
   computed: {
     ...mapGetters([

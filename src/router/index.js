@@ -131,7 +131,6 @@ export const asyncRoutes = [
     path: '/utils',
     component: Layout,
     redirect: '/utils/example',
-    name: 'utils',
     meta: {
       title: 'utils',
       icon: 'component'

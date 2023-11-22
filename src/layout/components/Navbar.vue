@@ -22,7 +22,7 @@
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar.startsWith('http')?avatar:'/file-sever/'+avatar" class="user-avatar">
+          <img :src="avatar.startsWith('http')?avatar:VUE_APP_FILE_BASE_API+'/'+avatar" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
@@ -67,6 +67,14 @@ export default {
     SizeSelect,
     LangSelect,
     Search
+  },
+  data() {
+    return {
+      VUE_APP_FILE_BASE_API: ''
+    }
+  },
+  mounted() {
+    this.VUE_APP_FILE_BASE_API = process.env.VUE_APP_FILE_BASE_API
   },
   computed: {
     ...mapGetters([

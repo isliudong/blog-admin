@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-editor-container">
     <div class=" clearfix">
-      <pan-thumb :image="avatar.startsWith('http')?avatar:'/file-sever/'+avatar" style="float: left">
+      <pan-thumb :image="avatar.startsWith('http')?avatar:VUE_APP_FILE_BASE_API+'/'+avatar" style="float: left">
         Your roles:
         <span v-for="item in roles" :key="item.id" class="pan-info-roles">{{ item.name }}</span>
       </pan-thumb>
@@ -26,8 +26,12 @@ export default {
   components: { PanThumb, GithubCorner },
   data() {
     return {
-      emptyGif: 'hello.gif'
+      emptyGif: 'hello.gif',
+      VUE_APP_FILE_BASE_API: ''
     }
+  },
+  mounted() {
+    this.VUE_APP_FILE_BASE_API = process.env.VUE_APP_FILE_BASE_API
   },
   computed: {
     ...mapGetters([

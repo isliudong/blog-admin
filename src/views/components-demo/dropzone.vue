@@ -5,7 +5,7 @@
       {{ $t('components.dropzoneTips') }}
     </aside>
     <div class="editor-container">
-      <dropzone id="myVueDropzone" :url="process.env.VUE_APP_FILE_BASE_API" @dropzone-removedFile="dropzoneR" @dropzone-success="dropzoneS" />
+      <dropzone id="myVueDropzone" :url="VUE_APP_FILE_BASE_API" @dropzone-removedFile="dropzoneR" @dropzone-success="dropzoneS" />
     </div>
   </div>
 </template>
@@ -16,6 +16,14 @@ import Dropzone from '@/components/Dropzone'
 export default {
   name: 'DropzoneDemo',
   components: { Dropzone },
+  data() {
+    return {
+      VUE_APP_FILE_BASE_API: ''
+    }
+  },
+  mounted() {
+    this.VUE_APP_FILE_BASE_API = process.env.VUE_APP_FILE_BASE_API
+  },
   methods: {
     dropzoneS(file) {
       console.log(file)

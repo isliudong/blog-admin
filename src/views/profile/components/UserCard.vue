@@ -6,7 +6,7 @@
 
     <div class="user-profile">
       <div class="box-center">
-        <pan-thumb :image="user.avatar.startsWith('http')?user.avatar:'/file-sever/'+user.avatar" :height="'100px'" :width="'100px'" :hoverable="false">
+        <pan-thumb :image="user.avatar.startsWith('http')?user.avatar:VUE_APP_FILE_BASE_API+'/'+user.avatar" :height="'100px'" :width="'100px'" :hoverable="false">
           <div>Hello</div>
           {{ user.roles }}
         </pan-thumb>
@@ -69,6 +69,14 @@ export default {
         }
       }
     }
+  },
+  data() {
+    return {
+      VUE_APP_FILE_BASE_API: ''
+    }
+  },
+  mounted() {
+    this.VUE_APP_FILE_BASE_API = process.env.VUE_APP_FILE_BASE_API
   }
 }
 </script>
