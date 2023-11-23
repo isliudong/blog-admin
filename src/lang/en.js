@@ -1,6 +1,7 @@
 export default {
   route: {
     shop: 'GPT Shop',
+    keyUsed: 'Key Used',
     dashboard: 'Dashboard',
     documentation: 'Documentation',
     guide: 'Guide',
@@ -136,7 +137,11 @@ export default {
     draft: 'Draft',
     delete: 'Delete',
     cancel: 'Cancel',
-    confirm: 'Confirm'
+    confirm: 'Confirm',
+    tokenUsed: 'Token Used',
+    apiKey: 'API Key',
+    apiCode: 'API Code',
+    quotaUsed: 'Quota Used'
   },
   example: {
     warning: 'Creating and editing pages cannot be cached by keep-alive because keep-alive include does not currently support caching based on routes, so it is currently cached based on component name. If you want to achieve a similar caching effect, you can use a browser caching scheme such as localStorage. Or do not use keep-alive include to cache all pages directly. See details'

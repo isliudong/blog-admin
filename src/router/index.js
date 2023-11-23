@@ -128,6 +128,18 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/key-used',
+    component: Layout,
+    children: [
+      {
+        path: 'key-used',
+        component: () => import('@/views/key-used/key-used'),
+        name: 'keyUsed',
+        meta: { title: 'keyUsed', icon: 'nested', affix: true }
+      }
+    ]
+  },
+  {
     path: '/utils',
     component: Layout,
     redirect: '/utils/example',

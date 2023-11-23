@@ -1,5 +1,6 @@
 export default {
   route: {
+    keyUsed: 'ApiKey统计',
     shop: 'GPT 商店',
     dashboard: '首页',
     documentation: '文档',
@@ -152,7 +153,11 @@ export default {
     publicAccess: '公开接口',
     createDate: '创建时间',
     authorize: '角色授权',
-    lastUpdatedDate: '更新时间'
+    lastUpdatedDate: '更新时间',
+    tokenUsed: 'Token',
+    apiKey: 'API Key',
+    apiCode: '模型',
+    quotaUsed: '金额'
   },
   example: {
     warning: '创建和编辑页面是不能被 keep-alive 缓存的，因为keep-alive 的 include 目前不支持根据路由来缓存，所以目前都是基于 component name 来进行缓存的。如果你想类似的实现缓存效果，可以使用 localStorage 等浏览器缓存方案。或者不要使用 keep-alive 的 include，直接缓存所有页面。详情见'
