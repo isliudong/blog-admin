@@ -7,7 +7,7 @@ const state = {
     withoutAnimation: false
   },
   navbar: {
-    opened: Cookies.get('navbarStatus') ? !!+Cookies.get('navbarStatus') : false,
+    opened: Cookies.get('navbarStatus') ? !!+Cookies.get('navbarStatus') : true,
     withoutAnimation: false
   },
   device: 'desktop',

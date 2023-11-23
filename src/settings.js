@@ -5,7 +5,7 @@ module.exports = {
    * @type {boolean} true | false
    * @description Whether show the settings right-panel
    */
-  showSettings: false,
+  showSettings: true,
 
   /**
    * fixme 同一组件多实例（编辑）缓存存在问题
