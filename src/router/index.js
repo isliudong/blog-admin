@@ -140,6 +140,18 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/keys',
+    component: Layout,
+    children: [
+      {
+        path: 'keys',
+        component: () => import('@/views/key-used/keys'),
+        name: 'keys',
+        meta: { title: 'keys', icon: 'nested', affix: true }
+      }
+    ]
+  },
+  {
     path: '/utils',
     component: Layout,
     redirect: '/utils/example',

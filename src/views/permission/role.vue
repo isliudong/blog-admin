@@ -220,6 +220,7 @@ export default {
     },
     handleRefreshRoute() {
       refreshRoutes(asyncRoutes).then(res => {
+        this.getRoutes()
         this.$message({
           type: 'success',
           message: 'refresh succeed!'
