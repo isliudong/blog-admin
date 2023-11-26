@@ -4,21 +4,19 @@
       <div class="good-title">GPT-3.5-turbo</div>
       <div class="good-desc">响应迅速</div>
       <div class="good-desc">性价比高</div>
-      <div class="good-price">0.00022$/1000 token</div>
+      <div class="good-price">提示$0.0018/1000 token<br>完成$0.0024/1000 token</div>
     </div>
     <div class="pan-btn good-card light-blue-btn document-btn-style" target="_blank" >
       <div class="good-title">GPT-4</div>
       <div class="good-desc">逻辑推理能力强</div>
-      <div class="good-desc">水桶旗舰</div>
-      <div class="good-price">0.00250$/1000 token</div>
-
+      <div class="good-desc">综合模型</div>
+      <div class="good-price">提示$0.036/1000 token<br>完成$0.072/1000 token</div>
     </div>
     <div class="pan-btn good-card pink-btn document-btn-style" target="_blank" >
       <div class="good-title">GPT-4-32k</div>
       <div class="good-desc">逻辑推理能力很强</div>
       <div class="good-desc">脑容量出众</div>
-      <div class="good-price">0.00290$/1000 token</div>
-
+      <div class="good-price">提示$0.072/1000 token<br>完成$0.144/1000 token</div>
     </div>
   </div>
 </template>
