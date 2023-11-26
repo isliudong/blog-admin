@@ -41,6 +41,32 @@
     </el-table>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.current" :limit.sync="listQuery.size" @pagination="getList" />
 
+    <el-tag class="filter-item" style="margin-left: 10px;" type="success">
+      地址(大陆直连):  https://panghucm.fun/openai/gpt
+      <div style="color:#817cd2;margin-top: 10px; word-break-wrap: break-word; ">
+        Curl 接口调用示例: <br>
+        curl --location 'https://panghucm.fun/openai/gpt/v1/chat/completions' \<br>
+        --header 'Content-Type: application/json' \<br>
+        --header 'Authorization: Bearer nk-c0ef481bxmcxbxhsgs63537d17' \<br>
+        --data '{<br>
+        "messages": [<br>
+        {<br>
+        "role": "user",<br>
+        "content": "ping"<br>
+        }<br>
+        ],<br>
+        "model": "gpt-3.5-turbo",<br>
+        "max_tokens": 800,<br>
+        "temperature": 0.7,<br>
+        "frequency_penalty": 0,<br>
+        "presence_penalty": 0,<br>
+        "top_p": 0.95,<br>
+        "stream": false,<br>
+        "stop": null<br>
+        }'<br>
+      </div>
+    </el-tag>
+
     <el-dialog :title="'Import ApiKey'" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
         <el-form-item :label="'ApiKey'" prop="apiKey">
