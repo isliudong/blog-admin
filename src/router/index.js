@@ -55,6 +55,7 @@ export const constantRoutes = [
     path: '/redirect',
     component: Layout,
     hidden: true,
+    public: true,
     children: [
       {
         path: '/redirect/:path(.*)',
@@ -64,21 +65,36 @@ export const constantRoutes = [
   },
   {
     path: '/login',
-    component: () => import('@/views/login/index'),
+    hidden: true,
+    public: true,
+    component: () => import('@/views/login/index')
+  },
+  {
+    path: '/register',
+    public: true,
+    component: () => import('@/views/register/index'),
     hidden: true
+  },
+  {
+    path: '/openai',
+    public: true,
+    component: () => import('@/views/public/openai/index')
   },
   {
     path: '/auth-redirect',
     component: () => import('@/views/login/auth-redirect'),
-    hidden: true
+    hidden: true,
+    public: true
   },
   {
     path: '/404',
+    public: true,
     component: () => import('@/views/error-page/404'),
     hidden: true
   },
   {
     path: '/401',
+    public: true,
     component: () => import('@/views/error-page/401'),
     hidden: true
   },
@@ -118,10 +134,11 @@ export const asyncRoutes = [
   {
     path: '/shop',
     component: Layout,
+    redirect: '/shop/index',
     children: [
       {
         path: 'index',
-        component: () => import('@/views/shop/index'),
+        component: () => import('@/views/public/openai/index'),
         name: 'shop',
         meta: { title: 'shop', icon: 'shopping', affix: true }
       }

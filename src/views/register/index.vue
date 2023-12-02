@@ -4,7 +4,7 @@
 
       <div class="title-container">
         <h3 class="title">
-          {{ $t('login.title') }}
+          {{ $t('login.new') }}
         </h3>
         <lang-select class="set-language" />
       </div>
@@ -40,7 +40,7 @@
             autocomplete="on"
             @keyup.native="checkCapslock"
             @blur="capsTooltip = false"
-            @keyup.enter.native="handleLogin"
+            @keyup.enter.native="handleRegister"
           />
           <span class="show-pwd" @click="showPwd">
             <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
@@ -48,17 +48,17 @@
         </el-form-item>
       </el-tooltip>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">
-        {{ $t('login.logIn') }}
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleRegister">
+        {{ $t('login.register') }}
       </el-button>
 
       <div style="position:relative">
         <div class="tips">
-          <span>Welcome to login ！</span>
+          <span>Your treasure was found ！</span>
         </div>
-        <router-link to="/register">
+        <router-link to="/login">
           <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
-            {{ $t('login.register') }}
+            {{ $t('login.logIn') }}
           </el-button>
         </router-link>
       </div>
@@ -146,13 +146,20 @@ export default {
         this.$refs.password.focus()
       })
     },
-    handleLogin() {
+    handleRegister() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm)
+          this.$store.dispatch('user/register', this.loginForm)
             .then(() => {
-              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+              /* 通知注册成功 */
+              this.$notify({
+                title: '注册成功',
+                message: '请登录',
+                type: 'success',
+                duration: 2000
+              })
+              this.$router.push({ path: '/login', query: this.otherQuery })
               this.loading = false
             })
             .catch(() => {

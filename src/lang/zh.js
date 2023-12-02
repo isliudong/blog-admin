@@ -84,6 +84,8 @@ export default {
   login: {
     title: 'Panghu CM',
     logIn: '登录',
+    register: '去注册',
+    new: '新用户',
     username: '账号',
     password: '密码',
     visitorUsername: '访客账号',

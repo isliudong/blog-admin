@@ -9,10 +9,10 @@
 
 <script>
 import { fetchList } from '@/api/article'
-import GoodsAll from '@/views/shop/components/tab/components/goods/GoodsAll.vue'
-import GoodsThree from '@/views/shop/components/tab/components/goods/GoodsThree.vue'
-import GoodsFour from '@/views/shop/components/tab/components/goods/GoodsFour.vue'
-import GoodsTest from '@/views/shop/components/tab/components/goods/GoodsTest.vue'
+import GoodsAll from '@/views/public/openai/components/tab/components/goods/GoodsAll.vue'
+import GoodsThree from '@/views/public/openai/components/tab/components/goods/GoodsThree.vue'
+import GoodsFour from '@/views/public/openai/components/tab/components/goods/GoodsFour.vue'
+import GoodsTest from '@/views/public/openai/components/tab/components/goods/GoodsTest.vue'
 
 export default {
   name: 'TabPane',

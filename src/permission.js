@@ -1,4 +1,4 @@
-import router from './router'
+import router, { constantRoutes } from './router'
 import store from './store'
 import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
@@ -7,8 +7,24 @@ import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
+function getPublicRoutes(routes) {
+  let publicRoutes = []
 
-const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
+  routes.forEach(route => {
+    if (route.public) {
+      publicRoutes.push(route.path)
+    }
+
+    if (route.children && route.children.length > 0) {
+      const childrenPublicRoutes = getPublicRoutes(route.children)
+      publicRoutes = publicRoutes.concat(childrenPublicRoutes)
+    }
+  })
+
+  return publicRoutes
+}
+
+const publicView = getPublicRoutes(constantRoutes)
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar
@@ -55,9 +71,9 @@ router.beforeEach(async(to, from, next) => {
       }
     }
   } else {
+    console.log(to.path)
     /* has no token*/
-
-    if (whiteList.indexOf(to.path) !== -1) {
+    if (publicView.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly
       next()
     } else {

@@ -12,9 +12,9 @@
             </router-link>
           </el-col>
           <el-col :span="4" class="text-center">
-            <router-link class="pan-btn light-blue-btn" to="/icon/index">
+            `<router-link class="pan-btn light-blue-btn" to="/icon/index">
               Icons
-            </router-link>
+            </router-link>`
           </el-col>
           <el-col :span="4" class="text-center">
             <router-link class="pan-btn pink-btn" to="/excel/export-excel">

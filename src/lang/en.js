@@ -79,6 +79,8 @@ export default {
   login: {
     title: 'Panghu CM',
     logIn: 'Login',
+    register: 'Register',
+    new: 'New',
     username: 'Username',
     password: 'Password',
     visitorUsername: 'Username',

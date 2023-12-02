@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, register, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
@@ -46,7 +46,19 @@ const actions = {
       })
     })
   },
-
+  register({ commit }, userInfo) {
+    const { username, password, email } = userInfo
+    return new Promise((resolve, reject) => {
+      register({ username: username.trim(), password: password, email: email }).then(({ token }) => {
+        // commit('SET_TOKEN', token)
+        // setToken(token)
+        // todo: 注册成功后自动登录
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
