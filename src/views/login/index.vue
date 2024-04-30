@@ -157,6 +157,7 @@ export default {
             })
             .catch(() => {
               this.loading = false
+              console.log('error login!!')
             })
         } else {
           console.log('error submit!!')

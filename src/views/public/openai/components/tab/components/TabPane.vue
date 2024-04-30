@@ -3,7 +3,6 @@
     <GoodsAll v-show="type==='all'"/>
     <GoodsThree v-show="type==='3.5'"/>
     <GoodsFour v-show="type==='4'"/>
-    <GoodsTest v-show="type==='test'"/>
   </div>
 </template>
 

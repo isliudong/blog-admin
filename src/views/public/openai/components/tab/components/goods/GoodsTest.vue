@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import example from '@/views/public/openai/components/example.vue'
+import example from '@/views/public/openai/components/tab/example.vue'
 import checkPermission from '@/utils/permission'
 
 export default {

@@ -76,9 +76,9 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/openai',
+    path: '/open',
     public: true,
-    component: () => import('@/views/public/openai/index')
+    component: () => import('@/views/public/index')
   },
   {
     path: '/auth-redirect',
@@ -138,7 +138,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'index',
-        component: () => import('@/views/public/openai/index'),
+        component: () => import('@/views/public/index'),
         name: 'shop',
         meta: { title: 'shop', icon: 'shopping', affix: true }
       }
